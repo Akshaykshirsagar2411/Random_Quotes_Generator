@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="quotes">
+        <h1>Quotes geneartor</h1>
+        <div id="content">
+        <p id="quates"></p>
+        <p id="auther"></p>
+        </div>
+        <button onclick="getquote(api_url,index)" id="btn">Generate new Quote</button>
+    </div>
+
+
+    <script>
+
+
+const api_url = "https://dummyjson.com/quotes";
+
+let arr =[]
+fetch("https://dummyjson.com/quotes")
+.then((res)=>res.json())
+.then((data)=>{
+
+    for(let key of data.quotes)
+    {
+        arr.push(key.quote)
+        
+    }
+})
+
+// console.log(arr)
+let index=Math.floor(Math.random()*30);
+let quatedata = document.getElementById("quates")
+let autherdata = document.getElementById("auther")
+quatedata.innerHTML=data.quotes[index].quote
+autherdata.innerHTML=data.quotes[index].author
+async function getquote(url,index){
+     
+    index=Math.floor(Math.random()*30)
+    const res = await fetch(url);
+    var data = await res.json();
+    console.log(data)
+    console.log(data.quotes[index].quote)
+   
+     quatedata.innerHTML=data.quotes[index].quote
+
+     let autherdata = document.getElementById("auther")
+     autherdata.innerHTML=data.quotes[index].author
+     autherdata.style.color='red'
+    
+
+    
+   console.log(index)
+
+    
+}
+if(index>=28){
+
+    
+    index=0
+}
+
+
+
+    </script>
+
+
+<style>
+
+body{
+
+    background-color: rgb(14, 21, 224);
+}
+
+#quotes{
+
+
+        border: 1px solid black;
+        background-color:#fff;
+        height: 350px;
+        border-radius: 30px;
+        width: 600px;
+        text-align: center;
+        margin-top: 150px;
+        margin-left: 25%;
+        margin-right:25%;
+    }
+
+   #quotes button{
+
+         /* background: lightgray; */
+         background:rgb(2, 156, 2);
+         font-size: 27px;
+         border-radius: 30px;
+         font-weight: 400;
+         padding: 15px;
+         color: #fff;
+         cursor: pointer;
+   } 
+   #quotes button:hover{
+    background: rgb(113, 244, 113);
+   }
+   #content{
+
+    border: 1px solid black;
+    height: 150px;
+    margin: 20px;
+    font-weight: 300;
+    font-size: 20px;
+    border-radius: 20px;
+
+   }
+</style>
+</body>
+</html>
